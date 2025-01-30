@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IAT Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 600px;
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        .iat-section {
+            margin-top: 20px;
+        }
+        .iat-task {
+            margin-bottom: 10px;
+        }
+        .iat-task label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .iat-response {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+ 
+<div class="container">
+    <h1>IAT Test</h1>
+ 
+    <!-- 基本信息收集部分 -->
+    <div>
+        <h2>基本信息</h2>
+        <form id="infoForm">
+            <div class="form-group">
+                <label for="age">年龄:</label>
+                <input type="number" id="age" name="age" required>
+            </div>
+            <div class="form-group">
+                <label for="gender">性别:</label>
+                <select id="gender" name="gender" required>
+                    <option value="">请选择</option>
+                    <option value="male">男</option>
+                    <option value="female">女</option>
+                    <option value="other">其他</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="education">学历:</label>
+                <select id="education" name="education" required>
+                    <option value="">请选择</option>
+                    <option value="highschool">高中</option>
+                    <option value="college">大专</option>
+                    <option value="bachelor">本科</option>
+                    <option value="master">硕士</option>
+                    <option value="phd">博士</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="ai_experience">experience</label>
+                <select id="ai_experience" name="ai_experience" required>
+                    <option value="">请选择</option>
+                    <option value="yes">有</option>
+                    <option value="no">无</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="ai_satisfaction">satisfaction</label>
+                <select id="ai_satisfaction" name="ai_satisfaction" required>
+                    <option value="">请选择</option>
+                    <option value="very_satisfied">非常满意</option>
+                    <option value="satisfied">满意</option>
+                    <option value="neutral">中立</option>
+                    <option value="dissatisfied">不满意</option>
+                    <option value="very_dissatisfied">非常不满意</option>
+                </select>
+            </div>
+            <button type="button" onclick="startIAT()">开始测验</button>
+        </form>
+    </div>
+ 
+    <!-- IAT测验部分 -->
+    <div class="iat-section" id="iatSection" style="display: none;">
+        <h2>IAT测验</h2>
+        <div class="iat-task" id="task1">
+            <label>任务1</label>
+            <div class="iat-response" data-response="left">左键选项</div>
+            <div class="iat-response" data-response="right">右键选项</div>
+        </div>
+        <!-- 你可以添加更多的任务 -->
+        <!-- ... -->
+        <button type="button" onclick="submitIAT()">提交测验</button>
+    </div>
+</div>
+ 
+<script>
+    function startIAT() {
+        // 获取基本信息
+        const age = document.getElementById('age').value;
+        const gender = document.getElementById('gender').value;
+        const education = document.getElementById('education').value;
+        const ai_experience = document.getElementById('ai_experience').value;
+        const ai_satisfaction = document.getElementById('ai_satisfaction').value;
+ 
+        // 简单验证信息是否完整
+        if (!age || !gender || !education || !ai_experience || !ai_satisfaction) {
+            alert('请填写完整的基本信息！');
+            return;
+        }
+ 
+        // 显示IAT测验部分
+        document.getElementById('infoForm').style.display = 'none';
+        document.getElementById('iatSection').style.display = 'block';
+ 
+        // 可以在此处进行更多初始化操作，例如记录开始时间等
+    }
+ 
+    function submitIAT() {
+        // 这里可以添加提交IAT测验结果的逻辑，例如发送到服务器
+        alert('测验完成！');
+ 
+        // 你可以将结果发送到服务器，或者在这里进行更多处理
+        // 例如，使用fetch API将数据发送到后端
+    }
+ 
+    // 示例：监听IAT响应点击事件（需要进一步完善）
+    document.querySelectorAll('.iat-response').forEach(response => {
+        response.addEventListener('click', function() {
+            const responseType = this.getAttribute('data-response');
+            console.log('响应类型:', responseType);
+            // 在这里添加记录响应时间的逻辑
+        });
+    });
+</script>
+ 
+</body>
+</html>
